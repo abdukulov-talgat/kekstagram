@@ -1416,3 +1416,51 @@ main {
 .hidden {
   display: none;
 }
+
+
+/***** My *****/
+.text__inner {
+  width: 450px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.text__help {
+  color: #fff;
+}
+
+.text__inner--success > *:first-child {
+  border-color: rgb(3, 168, 3);
+}
+
+.text__inner--error > *:first-child {
+  border-color: rgb(192, 23, 23);
+}
+
+.img-upload__submit:disabled {
+  opacity: 1;
+}
+
+.img-upload__submit:disabled > .my-spinner {
+  display: inline-block;
+  margin-left: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-left-color: #f7dd36;
+  vertical-align: middle;
+  border-radius: 50%;
+  animation-name: spine;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@keyframes spine {
+  0% {
+    transform: rotate(0deg)
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

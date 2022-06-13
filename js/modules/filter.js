@@ -141,3 +141,13 @@ function hideSlider() {
 function showSlider() {
   effectLevel.classList.remove('hidden');
 }
+
+function resetSlider() {
+  effectLevel.classList.add('hidden');
+  previewImg.classList = '';
+  previewImg.style.filter = '';
+  current = 'none';
+}
+
+
+export { resetSlider };

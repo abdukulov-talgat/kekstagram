@@ -24,7 +24,13 @@ bigger.addEventListener('click', () => {
 });
 
 
-function changeScale(){
+function changeScale() {
   const currentValue = parseInt(inputScale.value, 10) / 100;
   preview.style.transform = `scale(${currentValue})`;
 }
+
+function resetScale() {
+  changeScale();
+}
+
+export { resetScale };
