@@ -31,6 +31,7 @@ function showPreview() {
 }
 
 function closePreview() {
+  uploadInput.value = '';
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   window.removeEventListener('keydown', onWindowEscKeyDown);
