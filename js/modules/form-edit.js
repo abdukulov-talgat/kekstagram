@@ -1,28 +1,38 @@
+import { validateUploadForm, validateUploadFile } from './form-validate.js';
+import { sendData } from './network.js';
 import { showError } from './error.js';
 
+const form = document.querySelector('.img-upload__form');
+
+form.addEventListener('submit', (evt) => {
+  evt.preventDefault();
+
+  if(!validateUploadForm()){
+    return;
+  }
+
+  const body = new FormData(evt.target);
+  sendData(body);
+});
+
+
+// UploadFile
 const uploadInput = document.querySelector('#upload-file');
 const overlay = document.querySelector('.img-upload__overlay');
 const previewImg = document.querySelector('.img-upload__preview img');
 const cancel = document.querySelector('#upload-cancel');
 
-const ACCEPT_TYPES = [
-  'jpg',
-  'png',
-  'jpeg',
-];
-
 uploadInput.addEventListener('change', () => {
-  const file = uploadInput.files[0];
-  if (ACCEPT_TYPES.some((type) => file.name.endsWith(type))) {
+  if(validateUploadFile()){
+    const file = uploadInput.files[0];
     previewImg.src = URL.createObjectURL(file);
     showPreview();
-  } else {
+  }else {
     showError('Неверный формат файла.');
+    clearUploadFile();
   }
 });
-
 cancel.addEventListener('click',closePreview);
-
 
 function showPreview() {
   overlay.classList.remove('hidden');
@@ -31,10 +41,14 @@ function showPreview() {
 }
 
 function closePreview() {
-  uploadInput.value = '';
+  clearUploadFile();
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   window.removeEventListener('keydown', onWindowEscKeyDown);
+}
+
+function clearUploadFile() {
+  uploadInput.value = '';
 }
 
 function onWindowEscKeyDown(evt) {

@@ -13,10 +13,9 @@ const pristine = new Pristine(form, {
   errorTextClass: 'text__help'
 }, false);
 
-form.addEventListener('submit', (evt) => {
-  evt.preventDefault();
-  console.log(pristine.validate());
-});
+function validateUploadForm() {
+  return pristine.validate();
+}
 
 
 // Dont close modal when inputs in focus
@@ -90,3 +89,19 @@ pristine.addValidator(
   () => inputComment.value.length <= MAX_LENGTH,
   `длина комментария не может составлять больше ${MAX_LENGTH} символов`
 );
+
+
+//file upload Validation
+const ACCEPT_TYPES = [
+  'jpg',
+  'png',
+  'jpeg',
+];
+const uploadInput = document.querySelector('#upload-file');
+
+function validateUploadFile() {
+  const file = uploadInput.files[0];
+  return ACCEPT_TYPES.some((type)=> file.name.endsWith(type));
+}
+
+export {validateUploadForm, validateUploadFile};
