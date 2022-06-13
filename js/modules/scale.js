@@ -1,7 +1,7 @@
 const smaller = document.querySelector('.scale__control--smaller');
 const bigger = document.querySelector('.scale__control--bigger');
 const inputScale = document.querySelector('.scale__control--value');
-const preview = document.querySelector('.img-upload__preview ');
+const preview = document.querySelector('.img-upload__preview');
 
 const STEP = 25;
 const MIN = 25;

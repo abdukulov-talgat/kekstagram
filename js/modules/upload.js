@@ -2,7 +2,7 @@ import { showError } from './error.js';
 
 const uploadInput = document.querySelector('#upload-file');
 const overlay = document.querySelector('.img-upload__overlay');
-const preview = document.querySelector('.img-upload__preview img');
+const previewImg = document.querySelector('.img-upload__preview img');
 const cancel = document.querySelector('#upload-cancel');
 
 const ACCEPT_TYPES = [
@@ -14,7 +14,7 @@ const ACCEPT_TYPES = [
 uploadInput.addEventListener('change', () => {
   const file = uploadInput.files[0];
   if (ACCEPT_TYPES.some((type) => file.name.endsWith(type))) {
-    preview.src = URL.createObjectURL(file);
+    previewImg.src = URL.createObjectURL(file);
     showPreview();
   } else {
     showError('Неверный формат файла.');
