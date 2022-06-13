@@ -1416,3 +1416,23 @@ main {
 .hidden {
   display: none;
 }
+
+
+/***** My *****/
+.text__inner {
+  width: 450px;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.text__help {
+  color: #fff;
+}
+
+.text__inner--success > *:first-child {
+  border-color: rgb(3, 168, 3);
+}
+
+.text__inner--error > *:first-child {
+  border-color: rgb(192, 23, 23);
+}
