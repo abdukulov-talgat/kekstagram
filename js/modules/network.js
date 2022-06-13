@@ -1,3 +1,6 @@
+import { showError } from './error.js';
+import { showSuccess } from './success.js';
+import { closePreview, enableSubmit, resetForm } from './form-edit.js';
 const ACTION_URL = 'https://25.javascript.pages.academy/kekstagram';
 
 
@@ -6,10 +9,24 @@ function sendData(body) {
     method: 'POST',
     body
   })
-    .then((response) => response.json())
-    .then((json) => {
-      console.log(json);
+    .then((response) => {
+      if (response.ok) {
+        resetForm();
+        showSuccess();
+
+      } else {
+        throw new Error(`${response.status}:\t${response.statusText}`);
+      }
+    })
+    .catch(() => {
+      showError('Не удалось отправить.');
+    })
+    .finally(() => {
+      closePreview();
+      enableSubmit();
     });
+
+
 }
 
 

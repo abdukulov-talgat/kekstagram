@@ -1,20 +1,38 @@
 import { validateUploadForm, validateUploadFile } from './form-validate.js';
 import { sendData } from './network.js';
 import { showError } from './error.js';
+import { resetScale } from './scale.js';
+import { resetSlider } from './filter.js';
 
 const form = document.querySelector('.img-upload__form');
 
 form.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
-  if(!validateUploadForm()){
+  if (!validateUploadForm()) {
     return;
   }
 
+  disableSubmit();
   const body = new FormData(evt.target);
   sendData(body);
 });
 
+const submitBtn = document.querySelector('.img-upload__submit');
+
+
+function disableSubmit() {
+  submitBtn.disabled = true;
+}
+function enableSubmit() {
+  submitBtn.disabled = false;
+}
+
+export function resetForm() {
+  form.reset();
+  resetScale();
+  resetSlider();
+}
 
 // UploadFile
 const uploadInput = document.querySelector('#upload-file');
@@ -23,16 +41,17 @@ const previewImg = document.querySelector('.img-upload__preview img');
 const cancel = document.querySelector('#upload-cancel');
 
 uploadInput.addEventListener('change', () => {
-  if(validateUploadFile()){
+  if (validateUploadFile()) {
     const file = uploadInput.files[0];
     previewImg.src = URL.createObjectURL(file);
     showPreview();
-  }else {
+  } else {
     showError('Неверный формат файла.');
     clearUploadFile();
   }
 });
-cancel.addEventListener('click',closePreview);
+
+cancel.addEventListener('click', closePreview);
 
 function showPreview() {
   overlay.classList.remove('hidden');
@@ -45,6 +64,7 @@ function closePreview() {
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   window.removeEventListener('keydown', onWindowEscKeyDown);
+  resetForm();
 }
 
 function clearUploadFile() {
@@ -52,8 +72,11 @@ function clearUploadFile() {
 }
 
 function onWindowEscKeyDown(evt) {
-  if(evt.key === 'Escape') {
+  if (evt.key === 'Escape') {
     evt.preventDefault();
     closePreview();
   }
 }
+
+
+export { closePreview, disableSubmit, enableSubmit };
