@@ -29,5 +29,17 @@ function sendData(body) {
 
 }
 
+function getData(cb) {
+  fetch(`${ACTION_URL}/data`)
+    .then((response) => {
+      if(response.ok) {
+        return response.json();
+      }
+      throw new Error('Не удалос2ь загрузить фото.');
+    })
+    .then(cb)
+    .catch(() => showError('Не удалось загрузить фото.'));
+}
 
-export { sendData };
+
+export { sendData, getData };
