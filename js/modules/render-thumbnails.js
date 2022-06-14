@@ -1,12 +1,18 @@
 import { getData } from './network.js';
 
+renderThumbs();
+
 const container = document.querySelector('.pictures');
 
-function renderThumbnails(predicate = () => true) {
+const imgFilters = document.querySelector('.img-filters');
+function renderThumbs(filter = (arr) => arr) {
   getData((thumbs) => {
-    thumbs = thumbs.filter(predicate);
+
+    thumbs = filter(thumbs);
     clearContainer();
     thumbs.forEach((item) => renderThumb(item));
+
+    imgFilters.classList.remove('img-filters--inactive');
   });
 }
 
@@ -28,7 +34,6 @@ function clearContainer() {
   }
 }
 
-
-export { renderThumbnails };
+export { renderThumbs};
 
 
