@@ -18,12 +18,16 @@ const form = document.querySelector('.img-filters__form');
 
 const onFormClickDebounced = debounce(onFormClick, DELAY);
 
-form.addEventListener('click', (evt) => {
-  onFormClickDebounced(evt);
+form.addEventListener('click', function (evt)
+{
+  onFormClickDebounced.bind(this, evt)();
 });
 
 
 function onFormClick(evt) {
+  Array.from(this.children).forEach((item) => item.classList.remove('img-filters__button--active'));
+  evt.target.classList.add('img-filters__button--active');
+
   renderThumbs(FILTERS[evt.target.id]);
 }
 
@@ -36,7 +40,7 @@ function debounce(cb, delay) {
       return;
     }
 
-    cb(evt);
+    cb.bind(this, evt)();
 
     isCooldown = true;
     setTimeout(() => {
