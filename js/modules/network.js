@@ -35,7 +35,7 @@ function getData(cb) {
       if(response.ok) {
         return response.json();
       }
-      throw new Error('Не удалос2ь загрузить фото.');
+      throw new Error('Не удалось загрузить фото.');
     })
     .then(cb)
     .catch(() => showError('Не удалось загрузить фото.'));

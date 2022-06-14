@@ -50,5 +50,8 @@ function getComments(count) {
   return arr;
 }
 
+function getRandomName() {
+  return NAMES[getRandomInt(0, NAMES.length - 1)];
+}
 
-export { getData };
+export { getData, getRandomName };
